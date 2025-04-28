@@ -1,0 +1,241 @@
+.cars-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .cars-page h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+  }
+  
+  .brand-selection {
+    margin-bottom: 30px;
+  }
+  
+  .brands-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .brand-btn {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .brand-btn:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .brand-btn.selected {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .cars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .car-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .car-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .car-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .car-info {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .car-info h2 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: var(--accent-color);
+  }
+  
+  .reset-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reset-btn:hover {
+    background-color: #c82333;
+  }
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background-color: #f4f4f4;
+    border-radius: 20px;
+    width: 1100px; /* Широкое окно */
+    max-width: 95%; /* Адаптивность */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    animation: modal-appear 0.3s ease-out;
+  }
+  
+  @keyframes modal-appear {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .close-modal:hover {
+    background-color: #ff4d4d;
+    color: white;
+    transform: scale(1.1);
+  }
+  
+  .modal-car-details {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: calc(90vh - 050px);
+    padding: 20px;
+    background-color: white;
+  }
+  
+  .modal-car-image {
+    width: 100%;
+    height: 450px; /* Возвращаем стандартную высоту */
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .modal-car-info {
+    padding: 20px;
+    background-color: white;
+  }
+
+  /* Стилизация скроллбара */
+.modal-car-details::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-car-details::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.modal-car-details::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.modal-car-details::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+  
+  .spec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .spec-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .spec-item span {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .car-description, .car-additional-details {
+    margin-top: 20px;
+  }
+  
+  .car-additional-details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .car-additional-details li {
+    background-color: #f1f1f1;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 6px;
+  }

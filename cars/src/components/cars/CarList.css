@@ -1,0 +1,15 @@
+.car-list-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .car-details-section {
+    margin-top: 30px;
+  }

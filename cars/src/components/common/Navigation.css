@@ -1,0 +1,15 @@
+.main-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .main-navigation a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .main-navigation a:hover {
+    color: var(--text-color);
+  }
