@@ -9,7 +9,7 @@ from app.core.auth import get_current_active_user
 
 router = APIRouter()
 
-@router.get("/", response_model=List[schemas.FavoriteWithCar])
+@router.get("/", response_model=List[schemas.Favorite])
 def read_favorites(
     db: Session = Depends(get_db),
     skip: int = 0,
@@ -17,7 +17,20 @@ def read_favorites(
     current_user: models.User = Depends(get_current_active_user),
 ) -> Any:
     """
-    Получение списка избранных автомобилей текущего пользователя
+    Получение списка избранных автомобилей текущего пользователя (без информации о машинах)
+    """
+    favorites = crud.get_favorites_by_user(db, user_id=current_user.id, skip=skip, limit=limit)
+    return favorites
+
+@router.get("/with-cars", response_model=List[schemas.FavoriteWithCar])
+def read_favorites_with_cars(
+    db: Session = Depends(get_db),
+    skip: int = 0,
+    limit: int = 100,
+    current_user: models.User = Depends(get_current_active_user),
+) -> Any:
+    """
+    Получение списка избранных автомобилей с полной информацией о машинах
     """
     favorites = crud.get_favorites_by_user(db, user_id=current_user.id, skip=skip, limit=limit)
     return favorites
@@ -76,3 +89,13 @@ def check_favorite(
     Проверка, находится ли автомобиль в избранном у пользователя
     """
     return crud.check_is_favorite(db, user_id=current_user.id, car_id=car_id)
+
+@router.get("/count", response_model=int)
+def get_favorites_count(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_active_user),
+) -> Any:
+    """
+    Получение количества избранных автомобилей у текущего пользователя
+    """
+    return crud.get_favorites_count_by_user(db, user_id=current_user.id)

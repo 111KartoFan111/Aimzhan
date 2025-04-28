@@ -35,3 +35,16 @@
   ::-webkit-scrollbar {
     width: 0;
   }
+
+  @media screen and (max-width: 768px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+    }
+    .footer-content {
+      flex-direction: column;
+    }
+  }

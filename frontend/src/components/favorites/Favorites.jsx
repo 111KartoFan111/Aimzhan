@@ -11,11 +11,12 @@ function Favorites() {
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
+        // Используем правильный метод API для получения избранных с информацией о машинах
         const favoritesData = await favoriteService.getFavoritesWithCars();
         setFavorites(favoritesData);
       } catch (error) {
         setError('Не удалось загрузить избранные автомобили');
-        console.error(error);
+        console.error('Ошибка при загрузке избранного:', error);
       } finally {
         setLoading(false);
       }
@@ -23,7 +24,7 @@ function Favorites() {
 
     fetchFavorites();
   }, []);
-
+  
   const handleRemoveFromFavorites = async (carId) => {
     try {
       await favoriteService.removeFromFavorites(carId);

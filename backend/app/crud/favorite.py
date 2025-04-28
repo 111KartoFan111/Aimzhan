@@ -15,6 +15,9 @@ def get_favorite_by_user_and_car(db: Session, user_id: int, car_id: int) -> Opti
 def get_favorites_by_user(db: Session, user_id: int, skip: int = 0, limit: int = 100) -> List[Favorite]:
     return db.query(Favorite).filter(Favorite.user_id == user_id).offset(skip).limit(limit).all()
 
+def get_favorites_count_by_user(db: Session, user_id: int) -> int:
+    return db.query(Favorite).filter(Favorite.user_id == user_id).count()
+
 def create_favorite(db: Session, favorite: FavoriteCreate, user_id: int) -> Favorite:
     db_favorite = Favorite(
         user_id=user_id,

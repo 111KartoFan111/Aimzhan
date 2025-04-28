@@ -11,12 +11,13 @@ const favoriteService = {
     }
   },
 
-  // Получение избранных автомобилей с полной информацией
+// Получение избранных автомобилей с полной информацией
   getFavoritesWithCars: async () => {
     try {
       const response = await axiosInstance.get('/favorites/with-cars');
       return response.data;
     } catch (error) {
+      console.error('Ошибка при получении данных избранного с автомобилями:', error);
       throw error;
     }
   },

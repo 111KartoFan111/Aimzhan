@@ -4,6 +4,9 @@
   padding: 2rem;
   text-align: center;
 }
+a , .btn{
+  text-decoration: none !important;
+}
 
 .logo {
   height: 6em;

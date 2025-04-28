@@ -87,20 +87,25 @@ function ComparisonPage() {
           {/* Фильтр по брендам */}
           <div className="brands-filter">
             <select 
-              onChange={(e) => {
-                if (e.target.value === 'all') {
-                  // Показать все автомобили, кроме выбранных
+              onChange={async (e) => {
+                try {
                   const selectedIds = selectedCars.map(car => car.id);
-                  setAvailableCars(
-                    availableCars.filter(car => !selectedIds.includes(car.id))
-                  );
-                } else {
-                  // Фильтровать по выбранному бренду
-                  const selectedIds = selectedCars.map(car => car.id);
-                  const filteredCars = availableCars.filter(
-                    car => car.brand === e.target.value && !selectedIds.includes(car.id)
-                  );
-                  setAvailableCars(filteredCars);
+                  
+                  if (e.target.value === 'all') {
+                    // Показать все автомобили, кроме выбранных
+                    const allCars = await carService.getAllCars();
+                    setAvailableCars(
+                      allCars.filter(car => !selectedIds.includes(car.id))
+                    );
+                  } else {
+                    // Фильтровать по выбранному бренду
+                    const brandCars = await carService.getCarsByBrand(e.target.value);
+                    setAvailableCars(
+                      brandCars.filter(car => !selectedIds.includes(car.id))
+                    );
+                  }
+                } catch (error) {
+                  console.error('Ошибка при фильтрации по бренду:', error);
                 }
               }}
               className="brand-select"
@@ -111,7 +116,6 @@ function ComparisonPage() {
               ))}
             </select>
           </div>
-          
           {availableCars.length === 0 ? (
             <p className="no-cars-message">Нет доступных автомобилей</p>
           ) : (

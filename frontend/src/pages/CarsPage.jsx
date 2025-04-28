@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { CARS_DATA } from '../data/carsData';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import carService from '../services/carService';
 import './CarsPage.css';
 
 function CarsPage() {
-  // Get unique brands from the CARS_DATA
-  const brands = [...new Set(CARS_DATA.map(car => car.brand))];
+  // State для хранения данных из БД
+  const [brands, setBrands] = useState([]);
+  const [cars, setCars] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   
   // State to track selected brand
   const [selectedBrand, setSelectedBrand] = useState(null);
@@ -12,9 +16,34 @@ function CarsPage() {
   // State for modal
   const [selectedCar, setSelectedCar] = useState(null);
 
-  // Filter cars based on selected brand
+  // Загрузка данных при монтировании компонента
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        
+        // Получаем список всех брендов
+        const brandsData = await carService.getAllBrands();
+        setBrands(brandsData);
+        
+        // Загружаем все автомобили
+        const carsData = await carService.getAllCars();
+        setCars(carsData);
+        
+        setLoading(false);
+      } catch (err) {
+        setError('Ошибка при загрузке данных');
+        console.error(err);
+        setLoading(false);
+      }
+    };
+    
+    fetchData();
+  }, []);
+
+  // Фильтруем машины по выбранному бренду
   const filteredCars = selectedBrand 
-    ? CARS_DATA.filter(car => car.brand === selectedBrand)
+    ? cars.filter(car => car.brand === selectedBrand)
     : [];
 
   // Функция для открытия модального окна
@@ -26,6 +55,26 @@ function CarsPage() {
   const closeModal = () => {
     setSelectedCar(null);
   };
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Загрузка данных...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="error-container">
+        <h3>Ошибка</h3>
+        <p>{error}</p>
+        <button onClick={() => window.location.reload()} className="retry-btn">
+          Попробовать снова
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="cars-page">
@@ -47,8 +96,8 @@ function CarsPage() {
         </div>
       </div>
 
-      {/* Cars Display Section */}
-      {selectedBrand && (
+    {/* Cars Display Section */}
+    {selectedBrand && (
         <div>
           <h2>Модели {selectedBrand}</h2>
           <div className="cars-grid">
@@ -59,12 +108,13 @@ function CarsPage() {
                   <h2>{car.brand} {car.model}</h2>
                   <p>Год: {car.year}</p>
                   <p>Цена: ${car.price}</p>
-                  <button 
-                    className="btn" 
-                    onClick={() => openModal(car)}
+                  <Link 
+                    to={`/cars/${car.id}`} 
+                    className="btn"
                   >
                     Подробнее
-                  </button>
+                  </Link>
+
                 </div>
               </div>
             ))}
@@ -81,7 +131,6 @@ function CarsPage() {
           Сбросить выбор
         </button>
       )}
-
       {/* Модальное окно */}
       {selectedCar && (
         <div className="modal-overlay" onClick={closeModal}>

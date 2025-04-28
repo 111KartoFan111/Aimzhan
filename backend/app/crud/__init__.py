@@ -10,5 +10,5 @@ from app.crud.user import (
 
 from app.crud.favorite import (
     get_favorite, get_favorite_by_user_and_car, get_favorites_by_user,
-    create_favorite, delete_favorite, check_is_favorite
+    create_favorite, delete_favorite, check_is_favorite, get_favorites_count_by_user
 )

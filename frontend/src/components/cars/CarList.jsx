@@ -1,12 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CarCard from './CarCard';
-import CarDetails from './CarDetails';
 import carService from '../../services/carService';
 import favoriteService from '../../services/favoriteService';
 import authService from '../../services/authService';
 import './CarList.css';
-
 function CarList() {
   const [cars, setCars] = useState([]);
   const [selectedCar, setSelectedCar] = useState(null);
@@ -47,7 +46,6 @@ function CarList() {
   }, []);
 
   const handleSelectCar = (car) => {
-    setSelectedCar(car);
   };
 
   const handleToggleFavorite = async (carId, event) => {
@@ -107,7 +105,7 @@ function CarList() {
     <div className="car-list-container">
       <div className="car-grid">
         {cars.map(car => (
-          <div key={car.id} className="car-card" onClick={() => handleSelectCar(car)}>
+          <div key={car.id} className="car-card">
             <div className="car-card-image">
               <img src={car.image} alt={`${car.brand} ${car.model}`} />
               {isAuthenticated && (
@@ -131,12 +129,6 @@ function CarList() {
           </div>
         ))}
       </div>
-      
-      {selectedCar && (
-        <div className="car-details-section">
-          <CarDetails car={selectedCar} />
-        </div>
-      )}
     </div>
   );
 }
