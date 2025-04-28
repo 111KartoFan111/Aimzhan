@@ -1,0 +1,211 @@
+.car-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  
+  .car-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  
+  .car-detail-header h1 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 32px;
+  }
+  
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .back-btn:hover {
+    color: var(--primary-color);
+  }
+  
+  .favorite-btn {
+    padding: 10px 16px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .favorite-btn:hover {
+    background-color: var(--primary-color);
+  }
+  
+  .favorite-btn.active {
+    background-color: #dc3545;
+  }
+  
+  .favorite-btn.active:hover {
+    background-color: #c82333;
+  }
+  
+  .car-detail-content {
+    display: flex;
+    gap: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .car-detail-image-container {
+    flex: 1;
+    max-width: 50%;
+  }
+  
+  .car-detail-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .car-detail-info {
+    flex: 1;
+    padding: 30px;
+  }
+  
+  .car-basic-info {
+    margin-bottom: 30px;
+  }
+  
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .info-label {
+    color: var(--secondary-color);
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  
+  .info-value {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 18px;
+  }
+  
+  .car-description {
+    margin-bottom: 30px;
+  }
+  
+  .car-description h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 24px;
+  }
+  
+  .car-description p {
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  .car-features h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 24px;
+  }
+  
+  .features-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .feature-item {
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 5px;
+    position: relative;
+    padding-left: 25px;
+  }
+  
+  .feature-item::before {
+    content: '✓';
+    position: absolute;
+    left: 10px;
+    color: var(--accent-color);
+    font-weight: bold;
+  }
+  
+  .car-detail-error {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .car-detail-error h2 {
+    color: #dc3545;
+    margin-bottom: 15px;
+  }
+  
+  .back-to-cars-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 16px;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+  }
+  
+  .back-to-cars-btn:hover {
+    background-color: var(--primary-color);
+  }
+  
+  /* Адаптивность для мобильных устройств */
+  @media (max-width: 768px) {
+    .car-detail-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    
+    .car-detail-content {
+      flex-direction: column;
+    }
+    
+    .car-detail-image-container {
+      max-width: 100%;
+    }
+    
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .features-list {
+      grid-template-columns: 1fr;
+    }
+  }
